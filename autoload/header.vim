@@ -170,7 +170,7 @@ fun s:set_props()
     elseif b:filetype == 'octave' ||
           \ b:filetype == 'matlab' ||
           \ b:filetype == 'tex' ||
-		  \ b:filetype == 'vimwiki' 
+		  \ b:filetype == 'vimwiki'
         let b:comment_char = '%'
     " ----------------------------------
     elseif b:filetype == 'cfg'
@@ -673,7 +673,7 @@ endfun
 "   0: Normal Header
 "   1: Minified Header
 "   2: License Header (also uses license parameter)
-fun header#add_header(type, license, silent)
+fun header#add_header(type, license, silent, create)
     call s:set_props()
 
     " If filetype is available, add header else inform user
@@ -691,7 +691,7 @@ fun header#add_header(type, license, silent)
             " If there is already header, update it
             if file_contains_headers
                 call s:update_header()
-            else
+            elseif a:create == 1
                 call s:add_header()
             endif
         elseif a:type == 1
